@@ -1,0 +1,17 @@
+--cpu Cortex-M3
+".\objects\main.o"
+".\objects\system.o"
+".\objects\lm358.o"
+".\objects\meas.o"
+".\objects\afio.o"
+".\objects\clocks.o"
+".\objects\exti.o"
+".\objects\gpio.o"
+".\objects\gptm.o"
+".\objects\systick.o"
+".\objects\adc.o"
+".\objects\startup_stm32f10x_md.o"
+".\objects\system_stm32f10x.o"
+--ro-base 0x08000000 --entry 0x08000000 --rw-base 0x20000000 --entry Reset_Handler --first __Vectors --strict --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list ".\Listings\Power_Factor_Measurement.map" -o .\Objects\Power_Factor_Measurement.axf
