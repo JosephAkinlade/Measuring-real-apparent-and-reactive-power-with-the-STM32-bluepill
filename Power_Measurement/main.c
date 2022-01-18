@@ -60,7 +60,10 @@ int main(void)
 				old = difference;
 			}
 			
-			meter.phase_diff = ((old/20.0) * 2 * 3.14) - 3.14;
+			/*
+			* Phase difference is ((time difference between two waves) / period) * 2 * pi
+			*/
+			meter.phase_diff = ((old/20.0) * 2 * 3.14) - 3.14; // Subtraction is done to make result positive.
 			meter.pfactor = cos(meter.phase_diff );
 			meter.active_pwr = fabs((meter.current * meter.voltage * meter.pfactor));
 			meter.apparent_pwr = (meter.current * meter.voltage);
