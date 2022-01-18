@@ -16,9 +16,9 @@ extern void EXTI_Init(uint8_t extIntLine, bool edgeTrigger);
 extern void EXTI_Set_Edge_Detected(uint8_t extIntLine, bool isDetected);
 //Get trigger state (i.e. 'true' if edge is detected and 'false' if otherwise)
 extern bool EXTI_Get_Edge_Detected(uint8_t extIntLine);
-
-extern void EXTI_Get_Voltage_Count_Value(uint32_t* timestamp);
-extern void EXTI_Get_Current_Count_Value(uint32_t* timestamp);
+//Get timer values when an iterrupt occurs on the voltage and current channels
+extern void EXTI_Get_Voltage_Count_Value(int32_t* timestamp);
+extern void EXTI_Get_Current_Count_Value(int32_t* timestamp);
 
 extern void EXTI_Set_Flag_Status(bool status);
 extern bool EXTI_Get_Flag_Status(void);

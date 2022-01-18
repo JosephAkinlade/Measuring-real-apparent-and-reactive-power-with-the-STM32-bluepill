@@ -5,9 +5,7 @@
 #include "exti.h"
 #include "lm358.h"
 
-
-
-void voltage_Init(void)
+void LM358_Voltage_Init(void)
 {
 	/*PA0 GPIO configuration*/
 	GPIO_Input_Init(GPIOA,
@@ -20,12 +18,11 @@ void voltage_Init(void)
 	AFIO_Init(EXTI_LINE0, AFIO_EXTI_SELECT_PA0);
 	/*EXTI configuration for PA0*/
 	EXTI_Init(EXTI_LINE0, EXTI_RISING_EDGE);
-	//EXTI_Init(EXTI_LINE0, EXTI_FALLING_EDGE);
 	/*EXTI interrupt enable*/
 	NVIC_EnableIRQ(EXTI0_IRQn);
 }
 
-void current_Init(void)
+void LM358_Current_Init(void)
 {
 	/*PA4 GPIO config*/
 	GPIO_Input_Init(GPIOA,
@@ -37,12 +34,9 @@ void current_Init(void)
 	AFIO_Init(EXTI_LINE4, AFIO_EXTI_SELECT_PA4);
 	/*EXTI configuration for PA4*/
 	EXTI_Init(EXTI_LINE4, EXTI_RISING_EDGE);
-	//EXTI_Init(EXTI_LINE4, EXTI_FALLING_EDGE);
 	/*EXTI interrupt enable*/
-	NVIC_EnableIRQ(EXTI4_IRQn);
-	
+	NVIC_EnableIRQ(EXTI4_IRQn);	
 }
-
 
 void get_Voltage_Timer_Value(int32_t* V)
 {
@@ -54,8 +48,6 @@ void get_Current_Timer_Value(int32_t* C)
 	EXTI_Get_Current_Count_Value(C);
 
 }
-
-
 
 bool get_Flag_Status(void)
 {

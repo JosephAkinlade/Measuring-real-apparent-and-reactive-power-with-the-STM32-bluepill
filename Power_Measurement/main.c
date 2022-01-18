@@ -10,6 +10,8 @@
 /*
 CURRENT SENSOR: PA2
 VOLTAGE DIVIDER: PA1
+Current Op-amp: PA4
+Voltage Op-amp: PA0
 */
 
 typedef struct
@@ -22,9 +24,9 @@ typedef struct
 	double active_pwr;
 	double reactive_pwr;
 	
-}room_t;
+}meter_t;
 
-room_t room1 = {0};
+meter_t meter = {0};
 
 int32_t count1;
 int32_t count2;
@@ -37,14 +39,14 @@ static double old;
 int main(void)
 {
 	System_Init();
-	voltage_CurrentMeasurement_Init();
-	voltage_Init();
-	current_Init();
+	ADC_Measurement_Init();
+	LM358_Voltage_Init();
+	LM358_Current_Init();
 	
 	while(1)
 	{
-		room1.voltage = getVoltage(adcVoltage);
-		room1.current = getCurrent(adcCurrent);
+		meter.voltage = getVoltage(adcVoltage);
+		meter.current = getCurrent(adcCurrent);
 		
 		if(get_Flag_Status())
 		{
@@ -58,12 +60,11 @@ int main(void)
 				old = difference;
 			}
 			
-			room1.phase_diff = ((old/20.0) * 2 * 3.14) - 3.14;
-				
-			room1.pfactor = cos(room1.phase_diff );
-			room1.active_pwr = fabs((room1.current * room1.voltage * room1.pfactor));
-			room1.apparent_pwr = (room1.current * room1.voltage);
-			room1.reactive_pwr = fabs((room1.current * room1.voltage * sin(room1.phase_diff)));
+			meter.phase_diff = ((old/20.0) * 2 * 3.14) - 3.14;
+			meter.pfactor = cos(meter.phase_diff );
+			meter.active_pwr = fabs((meter.current * meter.voltage * meter.pfactor));
+			meter.apparent_pwr = (meter.current * meter.voltage);
+			meter.reactive_pwr = fabs((meter.current * meter.voltage * sin(meter.phase_diff)));
 			
 			reset_Flag_Status();
 			System_TimerDelayMs(5);

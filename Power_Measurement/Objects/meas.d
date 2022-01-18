@@ -9,4 +9,4 @@
   C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\arm_compat.h \
   C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\arm_acle.h \
   C:\Users\USER\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include\system_stm32f10x.h \
-  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdbool.h adc.h meas.h system.h
+  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdbool.h adc.h meas.h

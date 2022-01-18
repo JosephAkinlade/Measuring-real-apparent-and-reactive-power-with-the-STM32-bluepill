@@ -11,8 +11,6 @@ static volatile uint32_t count_v;
 static volatile uint32_t count_c;
 static volatile bool flag = false;
 
-
-
 void EXTI_Init(uint8_t extIntLine, bool edgeTrigger)
 {
 	/*
@@ -54,6 +52,11 @@ bool EXTI_Get_Edge_Detected(uint8_t extIntLine)
 
 bool EXTI_Get_Flag_Status(void)
 {
+	/*
+	@param: None
+	@brief: This function returns true when count values for the current and 
+	voltage channels have been recorded.
+	*/
 	return flag;
 }
 
@@ -63,13 +66,13 @@ void EXTI_Set_Flag_Status(bool status)
 }
 
 
-void EXTI_Get_Voltage_Count_Value(uint32_t* timestamp)
+void EXTI_Get_Voltage_Count_Value(int32_t* timestamp)
 {
 	*timestamp = count_v;
 	
 }
 
-void EXTI_Get_Current_Count_Value(uint32_t* timestamp)
+void EXTI_Get_Current_Count_Value(int32_t* timestamp)
 {
 	*timestamp = count_c;
 
@@ -82,16 +85,7 @@ void EXTI0_IRQHandler(void)
 	{
 		EXTI->PR |= EXTI_PR_PR0; //clear pending register bit
 	}
-//	if(GPIO_Input_Read(GPIOA, GPIO_PIN0))
-//	{
-//		count_v1 = SysTick_GetTick();
-//	}
-//	
-//	else
-//	{
-//		count_v2 = SysTick_GetTick();
-//		edgeDetected[EXTI_LINE0] = true;
-//	}
+
 	if(!flag)
 	{
 		count_v = SysTick_GetTick();
@@ -105,16 +99,7 @@ void EXTI4_IRQHandler(void)
 	{
 		EXTI->PR |= EXTI_PR_PR4; //clear pending register bit
 	}
-//	if(GPIO_Input_Read(GPIOA, GPIO_PIN4))
-//	{
-//		count_c1 = SysTick_GetTick();
-//	}
-//	
-//	else
-//	{
-//		count_c2 = SysTick_GetTick();
-//		edgeDetected[EXTI_LINE4] = true;
-//	}
+
 	if(!flag)
 	{
 		count_c = SysTick_GetTick();
